@@ -1,7 +1,5 @@
 <?php
 
-$db = new DB();
-
-$books = $db->getBooks($_REQUEST['search']);
+$books = (new DB())->getBooks($_REQUEST['search']);
 
 view("index", ['books' => $books]);

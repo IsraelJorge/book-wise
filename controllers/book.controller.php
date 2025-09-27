@@ -1,9 +1,7 @@
 <?php
 
-$db = new DB();
-
 $id = $_REQUEST['id'];
 
-$book =  $db->getByIdBook($id);
+$book =  (new DB())->getByIdBook($id);
 
 view("book", ['book' => $book]);
