@@ -1,13 +1,20 @@
 <?php
-
 class DB
 {
   private static $db = null;
+  private static $_config = null;
+
+  public static function setConfig($config)
+  {
+    self::$_config = $config;
+  }
 
   public static function connect(): PDO
   {
     if (self::$db === null) {
-      self::$db = new PDO('sqlite:database/db.sqlite');
+      $connectionString = self::$_config['drive'] . ':' . self::$_config['srcDB'];
+
+      self::$db = new PDO($connectionString);
       self::$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
       self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
