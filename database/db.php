@@ -14,42 +14,16 @@ class DB
     return self::$db;
   }
 
-  /** @return Book[] */
-  public function getBooks($search = '')
+  public function query($query, $class = null, $params = [])
   {
+    $prepare = self::connect()->prepare($query);
 
-    $query = self::connect()->prepare(
-      'SELECT * FROM books 
-      WHERE 
-        title LIKE :search 
-      OR 
-        author LIKE :search 
-      OR 
-        description LIKE :search'
-    );
+    if ($class) {
+      $prepare->setFetchMode(PDO::FETCH_CLASS, $class);
+    }
 
-    $query->setFetchMode(PDO::FETCH_CLASS, Book::class);
+    $prepare->execute($params);
 
-    $query->execute([':search' => '%' . $search . '%']);
-
-    $items = $query->fetchAll();
-
-    return $items;
-  }
-
-
-  public function getByIdBook($id): Book
-  {
-    $db = self::connect();
-
-    $query = $db->prepare('SELECT * FROM books WHERE books.id = :id');
-
-    $query->setFetchMode(PDO::FETCH_CLASS, Book::class);
-
-    $query->execute([':id' => $id]);
-
-    $item = $query->fetch();
-
-    return $item;
+    return $prepare;
   }
 }
