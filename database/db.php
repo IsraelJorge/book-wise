@@ -4,7 +4,7 @@ class DB
 {
   private static $db = null;
 
-  public static function connect()
+  public static function connect(): PDO
   {
     if (self::$db === null) {
       self::$db = new PDO('sqlite:database/db.sqlite');
@@ -14,10 +14,20 @@ class DB
     return self::$db;
   }
 
-  public function getBooks()
+  public function getBooks($search = '')
   {
 
-    $query = self::connect()->query('SELECT * FROM books');
+    $query = self::connect()->prepare(
+      'SELECT * FROM books 
+      WHERE 
+        title LIKE :search 
+      OR 
+        author LIKE :search 
+      OR 
+        description LIKE :search'
+    );
+
+    $query->execute([':search' => '%' . $search . '%']);
 
     $items = $query->fetchAll(PDO::FETCH_ASSOC);
 

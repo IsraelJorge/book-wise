@@ -2,11 +2,11 @@
 
 class Book
 {
-  public $id;
-  public $title;
-  public $description;
-  public $author;
-  public $stars;
+  public int $id;
+  public string $title;
+  public string $description;
+  public string $author;
+  public int $stars;
 
 
   public static function arrayToObject($items)

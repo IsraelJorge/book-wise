@@ -2,6 +2,7 @@
 
   <input
     type="text"
+    name="search"
     class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none"
     placeholder="Pesquisar..." />
   <button type="submit">
