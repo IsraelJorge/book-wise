@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require 'models/book.model.php';
 require 'utils.php';
 

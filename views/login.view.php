@@ -14,7 +14,6 @@
           id="email"
           type="email"
           name="email"
-          required
           class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none"
           placeholder="Digite seu e-mail..." />
 
@@ -28,7 +27,6 @@
           id="password"
           type="password"
           name="password"
-          required
           class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none"
           placeholder="Digite sua senha..." />
 
@@ -48,9 +46,20 @@
     </h1>
 
     <form method="POST" action="/registration" class="p-4 flex flex-col gap-4">
-      <?php if (strlen($message) > 0): ?>
-        <div class="w-full font-semibold border-2 border-green-800 bg-green-900 text-green-400 rounded-md px-5 py-1">
+      <?php if (isset($message) && strlen($message) > 0): ?>
+        <div class="w-full font-semibold text-sm border-2 border-green-800 bg-green-900 text-green-400 rounded-md px-5 py-1">
           <?= $message ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if (isset($validations) && sizeof($validations)): ?>
+        <div class="w-full font-semibold text-sm border-2 border-red-800 bg-red-900 text-red-400 rounded-md px-5 py-1">
+          <ul>
+            <li>Deu ruim!!!</li>
+            <?php foreach ($validations as $validation): ?>
+              <li><?= $validation ?></li>
+            <?php endforeach; ?>
+          </ul>
         </div>
       <?php endif; ?>
 
@@ -63,7 +72,6 @@
           id="name"
           type="text"
           name="name"
-          required
           class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none"
           placeholder="Digite seu nome..." />
       </div>
@@ -76,7 +84,6 @@
           id="email"
           type="email"
           name="email"
-          required
           class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none"
           placeholder="Digite seu e-mail..." />
       </div>
@@ -89,7 +96,6 @@
           id="email_confirm"
           type="email"
           name="email_confirm"
-          required
           class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none"
           placeholder="Confirme seu e-mail..." />
       </div>
@@ -102,7 +108,6 @@
           id="password"
           type="password"
           name="password"
-          required
           class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none"
           placeholder="Digite sua senha..." />
       </div>

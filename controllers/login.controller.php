@@ -1,5 +1,12 @@
 <?php
 
 $message = $_REQUEST['message'] ?? '';
+$validations = $_SESSION['validations'];
 
-view("login", compact('message'));
+view(
+  "login",
+  [
+    'message' => $message,
+    'validations' => $validations
+  ]
+);
