@@ -34,7 +34,7 @@ $links = [
     </ul>
 
     <ul>
-      <li><a class="hover:underline" href="/">Fazer Login</a></li>
+      <li><a class="hover:underline" href="/login">Fazer Login</a></li>
     </ul>
   </nav>
 </header>
