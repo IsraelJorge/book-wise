@@ -1,9 +1,10 @@
 <?php
+require 'models/book.model.php';
+require 'models/user.model.php';
+
 session_start();
 
-require 'models/book.model.php';
 require 'utils.php';
-
 $config = require 'config.php';
 require 'database/db.php';
 

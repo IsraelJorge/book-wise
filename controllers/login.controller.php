@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $user = (new DB())
     ->query(
       query: 'SELECT * FROM users where email = :email AND password = :password',
+      class: User::class,
       params: ['email' => $email, 'password' =>  $password]
     )->fetch();
 
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($user) {
     $_SESSION['auth'] = $user;
-    $_SESSION['message'] = "Seja bem vindo {$user['name']}!!";
+    $_SESSION['message'] = "Seja bem vindo {$user->name}!!";
     header('location: /');
     exit();
   }
