@@ -5,14 +5,14 @@
       Login
     </h1>
 
-    <form class="p-4 flex flex-col gap-4">
+    <form method="POST" class="p-4 flex flex-col gap-4">
       <div class="flex flex-col gap-1">
         <label class="text-stone-400 font-semibold text-sm" for="email">
           E-mail
         </label>
         <input
           id="email"
-          type="email"
+          type="text"
           name="email"
           class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none"
           placeholder="Digite seu e-mail..." />

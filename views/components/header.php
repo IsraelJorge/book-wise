@@ -34,7 +34,11 @@ $links = [
     </ul>
 
     <ul>
-      <li><a class="hover:underline" href="/login">Fazer Login</a></li>
+      <?php if (isset($_SESSION['auth'])): ?>
+        <li><a class="hover:underline" href="/logout">Oi, <?= $_SESSION['auth']['name'] ?></a></li>
+      <?php else: ?>
+        <li><a class="hover:underline" href="/login">Fazer Login</a></li>
+      <?php endif; ?>
     </ul>
   </nav>
 </header>
