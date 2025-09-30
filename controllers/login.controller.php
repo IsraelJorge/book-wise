@@ -28,14 +28,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $user = (new DB())
     ->query(
-      query: 'SELECT * FROM users where email = :email AND password = :password',
+      query: 'SELECT * FROM users where email = :email',
       class: User::class,
-      params: ['email' => $email, 'password' =>  $password]
+      params: ['email' => $email,]
     )->fetch();
 
 
 
   if ($user) {
+    $passwordDatabaseHash = $user->password;
+
+    if (!password_verify($password, $passwordDatabaseHash)) {
+      flash()->push('validations_login', ['E-mail ou senha estão incorretos.']);
+      header('location: /login');
+      exit();
+    }
+
     $_SESSION['auth'] = $user;
     flash()->push('message', "Seja bem vindo {$user->name}!!");
     header('location: /');

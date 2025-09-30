@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     params: [
       'name' => $name,
       'email' => $email,
-      'password' => $password
+      'password' => password_hash($password, PASSWORD_BCRYPT)
     ]
   );
 }
