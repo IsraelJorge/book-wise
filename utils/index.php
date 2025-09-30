@@ -63,3 +63,9 @@ function auth()
 
   return $auth;
 }
+
+function redirect($route)
+{
+  header("location: $route");
+  exit();
+}

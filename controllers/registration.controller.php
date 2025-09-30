@@ -29,8 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
   if ($validation->isInvalid('register')) {
-    header('location: /login');
-    exit();
+    redirect('/login');
   }
 
   (new DB())->query(
@@ -44,5 +43,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 flash()->push('message', "Registrado com sucesso!!!");
-header('location: /login');
-exit();
+redirect('/login');

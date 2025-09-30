@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-  header('location: /');
+  redirect('/');
   exit();
 }
 
@@ -25,8 +25,7 @@ $validation = Validation::validate([
 ]);
 
 if ($validation->isInvalid('review')) {
-  header("location: /book?id=$book_id");
-  exit();
+  redirect("/book?id=$book_id");
 }
 
 
@@ -36,5 +35,4 @@ if ($validation->isInvalid('review')) {
 );
 
 flash()->push("message", 'Avaliação feita com sucesso!!!');
-header("location: /book?id=$book_id");
-exit();
+redirect("/book?id=$book_id");

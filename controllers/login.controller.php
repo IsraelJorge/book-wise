@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   ]);
 
   if ($validation->isInvalid('login')) {
-    header('location: /login');
-    exit();
+    redirect('/login');
   }
 
   $user = (new DB())
@@ -40,14 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!password_verify($password, $passwordDatabaseHash)) {
       flash()->push('validations_login', ['E-mail ou senha estão incorretos.']);
-      header('location: /login');
-      exit();
+      redirect('/login');
     }
 
     $_SESSION['auth'] = $user;
     flash()->push('message', "Seja bem vindo {$user->name}!!");
-    header('location: /');
-    exit();
+    redirect('/');
   }
 }
 
