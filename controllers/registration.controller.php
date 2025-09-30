@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ],
     'email' => [
       'fieldName' => 'E-mail',
-      'rules' => ['required', 'email', 'confirmed']
+      'rules' => ['required', 'email', 'confirmed', 'unique:users']
     ],
     'password' => [
       'fieldName' => 'Senha',

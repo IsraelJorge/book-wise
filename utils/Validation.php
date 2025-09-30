@@ -26,10 +26,10 @@ class Validation
           $validation->$rule($nameField, $fieldValue, $confirmValue);
         } elseif (str_contains($rule, ':')) {
           $temp = explode(':', $rule, 2);
-          $ruleMinOrMax = $temp[0];
+          $ruleCustom = $temp[0];
           $ruleArg = $temp[1];
 
-          $validation->$ruleMinOrMax($nameField, $fieldValue, $ruleArg);
+          $validation->$ruleCustom($nameField, $fieldValue, $ruleArg, $field);
         } else {
           $validation->$rule($nameField, $fieldValue);
         }
@@ -73,6 +73,27 @@ class Validation
       $this->validations[] = "O $field precisa ter no máximo $max caracteres.";
     }
   }
+
+  private function unique($field, $value, $table, $tableField)
+  {
+
+    if (strlen($value) == 0) {
+      return;
+    }
+
+    $result = (new DB())
+      ->query(
+        query: "SELECT * FROM $table WHERE $tableField = :value",
+        params: ['value' => $value]
+      )
+      ->fetch();
+
+    if ($result) {
+      $this->validations[] = "O $field já está sendo usado.";
+    }
+  }
+
+
 
   public function isInvalid($customKey = null)
   {

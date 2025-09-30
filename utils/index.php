@@ -41,3 +41,14 @@ function flash()
 {
   return new Flash();
 }
+
+function config($key = null)
+{
+  $config = require 'config.php';
+
+  if ($key && isset($config[$key])) {
+    return $config[$key];
+  }
+
+  return $config;
+}
