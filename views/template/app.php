@@ -13,6 +13,11 @@
   <?php include('./views/components/header.php'); ?>
 
   <main class="mx-auto max-w-screen-lg py-4 space-y-6">
+    <?php if ($message = flash()->get('message')): ?>
+      <div class="w-full font-semibold text-sm border-2 border-green-800 bg-green-900 text-green-400 rounded-md px-5 py-1">
+        <?= $message ?>
+      </div>
+    <?php endif; ?>
 
     <?php require "views/{$view}.view.php"; ?>
 

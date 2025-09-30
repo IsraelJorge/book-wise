@@ -4,7 +4,9 @@ require 'models/user.model.php';
 
 session_start();
 
-require 'utils.php';
+require 'utils/Flash.php';
+require 'utils/Validation.php';
+require 'utils/index.php';
 $config = require 'config.php';
 require 'database/db.php';
 

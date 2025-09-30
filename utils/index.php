@@ -1,5 +1,6 @@
 <?php
 
+
 function view($view, $data = [])
 {
 
@@ -34,4 +35,9 @@ function abort($code)
 function isRouteActive($route)
 {
   return parse_url($_SERVER['REQUEST_URI'])['path'] === $route;
+}
+
+function flash()
+{
+  return new Flash();
 }

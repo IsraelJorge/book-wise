@@ -6,6 +6,17 @@
     </h1>
 
     <form method="POST" class="p-4 flex flex-col gap-4">
+      <?php if ($validationsLogin = flash()->get('validations_login')): ?>
+        <div class="w-full font-semibold text-sm border-2 border-red-800 bg-red-900 text-red-400 rounded-md px-5 py-1">
+          <ul>
+            <li>Deu ruim!!!</li>
+            <?php foreach ($validationsLogin as $validation): ?>
+              <li><?= $validation ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
+
       <div class="flex flex-col gap-1">
         <label class="text-stone-400 font-semibold text-sm" for="email">
           E-mail
@@ -46,17 +57,11 @@
     </h1>
 
     <form method="POST" action="/registration" class="p-4 flex flex-col gap-4">
-      <?php if (isset($message) && strlen($message) > 0): ?>
-        <div class="w-full font-semibold text-sm border-2 border-green-800 bg-green-900 text-green-400 rounded-md px-5 py-1">
-          <?= $message ?>
-        </div>
-      <?php endif; ?>
-
-      <?php if (isset($validations) && sizeof($validations)): ?>
+      <?php if ($validationsRegister = flash()->get('validations_register')): ?>
         <div class="w-full font-semibold text-sm border-2 border-red-800 bg-red-900 text-red-400 rounded-md px-5 py-1">
           <ul>
             <li>Deu ruim!!!</li>
-            <?php foreach ($validations as $validation): ?>
+            <?php foreach ($validationsRegister as $validation): ?>
               <li><?= $validation ?></li>
             <?php endforeach; ?>
           </ul>

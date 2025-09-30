@@ -1,5 +1,4 @@
 <?php
-require 'Validation.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $name = trim($_POST['name']);
@@ -18,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ],
     'password' => [
       'fieldName' => 'Senha',
-      'rules' => ['required', 'min:8', 'max:30']
+      'rules' => ['required', 'min:6', 'max:30']
     ]
   ], [
     'name' => $name,
@@ -27,23 +26,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     'password' => $password
   ]);
 
-  if ($validation->isInvalid()) {
-    $_SESSION['validations'] = $validation->validations;
+
+
+  if ($validation->isInvalid('register')) {
     header('location: /login');
     exit();
   }
-
-  $_SESSION['validations'] = null;
 
   (new DB())->query(
     query: 'INSERT INTO users (name, email, password) VALUES (:name, :email, :password)',
     params: [
       'name' => $name,
       'email' => $email,
-      'password' => password_hash($password, PASSWORD_DEFAULT)
+      'password' => $password
     ]
   );
 }
 
-header('location: /login?message=Registrado com sucesso!!!');
+flash()->push('message', "Registrado com sucesso!!!");
+header('location: /login');
 exit();

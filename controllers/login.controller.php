@@ -1,12 +1,30 @@
 <?php
 
 $message = $_REQUEST['message'] ?? '';
-$validations = $_SESSION['validations'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = trim($_POST['email']);
   $password = trim($_POST['password']);
 
+
+  $validation = Validation::validate([
+    'email' => [
+      'fieldName' => 'E-mail',
+      'rules' => ['required', 'email',]
+    ],
+    'password' => [
+      'fieldName' => 'Senha',
+      'rules' => ['required', 'min:6', 'max:30']
+    ]
+  ], [
+    'email' => $email,
+    'password' => $password
+  ]);
+
+  if ($validation->isInvalid('login')) {
+    header('location: /login');
+    exit();
+  }
 
   $user = (new DB())
     ->query(
@@ -19,16 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($user) {
     $_SESSION['auth'] = $user;
-    $_SESSION['message'] = "Seja bem vindo {$user->name}!!";
+    flash()->push('message', "Seja bem vindo {$user->name}!!");
     header('location: /');
     exit();
   }
 }
 
-view(
-  "login",
-  [
-    'message' => $message,
-    'validations' => $validations
-  ]
-);
+view("login",);

@@ -74,8 +74,16 @@ class Validation
     }
   }
 
-  public function isInvalid()
+  public function isInvalid($customKey = null)
   {
+    $key = 'validations';
+
+    if ($customKey) {
+      $key .= '_' . $customKey;
+    }
+
+    flash()->push($key, $this->validations);
+
     return sizeof($this->validations) > 0;
   }
 }
