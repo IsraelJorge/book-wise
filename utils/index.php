@@ -52,3 +52,14 @@ function config($key = null)
 
   return $config;
 }
+
+function auth()
+{
+  if (!isset($_SESSION['auth'])) {
+    return null;
+  }
+
+  $auth = new User($_SESSION['auth']);
+
+  return $auth;
+}
