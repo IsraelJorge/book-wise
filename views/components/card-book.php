@@ -11,7 +11,10 @@
         <?php for ($i = 0; $i < $book->stars; $i++): ?>
           ⭐
         <?php endfor; ?>
-        avaliação
+        <?php if (isset($reviews)): ?>
+          (<?= count($reviews) ?>)
+        <?php endif; ?>
+        avaliações
       </div>
     </div>
   </div>

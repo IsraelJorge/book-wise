@@ -1,6 +1,7 @@
 <?php
 require 'models/book.model.php';
 require 'models/user.model.php';
+require 'models/review.model.php';
 
 session_start();
 

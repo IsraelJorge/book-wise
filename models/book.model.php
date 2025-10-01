@@ -8,7 +8,6 @@ class Book
   public string $author;
   public int $stars;
 
-
   public static function arrayToObject($items)
   {
     $result = [];

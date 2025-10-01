@@ -1,12 +1,55 @@
-<?php include('./views/components/card-book.php') ?>
+<?php
+
+$sumRating = array_reduce($reviews, function ($acc, $item) {
+  return $acc + $item->rating;
+}, 0);
+
+$sumRating = round($sumRating / 5);
+$starsFinal = str_repeat("⭐", $sumRating);
+
+?>
+
+<div class="border-stone-800 border-2 bg-stone-900 p-2 rounded">
+  <div class="flex">
+    <div class="w-1/3">
+      imagem
+    </div>
+
+    <div class="space-y-1">
+      <a href="/book?id=<?= $book->id ?>" class="font-semibold hover:underline"><?= $book->title ?></a>
+      <div class="text-xs italic"><?= $book->author ?></div>
+      <div class="text-xs italic">
+        <?= $starsFinal ?>
+        <?php if (isset($reviews)): ?>
+          (<?= count($reviews) ?>)
+        <?php endif; ?>
+        avaliações
+      </div>
+    </div>
+  </div>
+
+  <div class="text-sm mt-1">
+    <?= $book->description ?>
+  </div>
+</div>
 
 <h2>
   Avalizações
 </h2>
 
 <div class="grid grid-cols-4 gap-4">
-  <div class="col-span-3">
-    Lista
+  <div class="grid col-span-3 gap-4">
+
+    <?php foreach ($reviews as $review): ?>
+      <div class="border border-stone-700 rounded p-3">
+        <div class="flex gap-1">
+          <h3><?= $review->review ?></h3>
+          <?php $rating = str_repeat("⭐", $review->rating);  ?>
+          <span><?= $rating ?></span>
+        </div>
+      </div>
+    <?php endforeach; ?>
+
   </div>
 
 
