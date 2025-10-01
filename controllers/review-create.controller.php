@@ -2,7 +2,10 @@
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   redirect('/');
-  exit();
+}
+
+if (!auth()) {
+  abort(403);
 }
 
 $review = trim($_POST['review']);
