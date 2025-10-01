@@ -1,11 +1,6 @@
 <?php
 
-$sumRating = array_reduce($reviews ?? [], function ($acc, $item) {
-  return $acc + $item->rating;
-}, 0);
-
-$sumRating = round($sumRating / 5);
-$starsFinal = str_repeat("⭐", $sumRating);
+$starsFinal = str_repeat("⭐", $book->average_rating);
 
 ?>
 
@@ -18,13 +13,11 @@ $starsFinal = str_repeat("⭐", $sumRating);
     <div class="space-y-1">
       <a href="/book?id=<?= $book->id ?>" class="font-semibold hover:underline"><?= $book->title ?></a>
       <div class="text-xs italic"><?= $book->author ?></div>
-      <?php if (isset($reviews)): ?>
-        <div class="text-xs italic">
-          <?= $starsFinal ?>
-          (<?= count($reviews) ?>)
-          avaliações
-        </div>
-      <?php endif; ?>
+      <div class="text-xs italic">
+        <?= $starsFinal ?>
+        (<?= $book->total_rating ?>)
+        avaliações
+      </div>
     </div>
   </div>
 
