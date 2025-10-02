@@ -8,7 +8,7 @@ class Book
   public string $author;
   public int $average_rating;
   public int $total_rating;
-
+  public ?string $image_url;
 
   public function query($where, $params)
   {
@@ -18,6 +18,7 @@ class Book
 	              b.title,
 	              b.author,
 	              b.description,
+                b.image_url,
 	              COALESCE(round(sum(r.rating) / 5.0), 0) as average_rating,
 	              COALESCE(count(r.id), 0) as total_rating
               FROM
@@ -28,9 +29,10 @@ class Book
 	              $where
               GROUP BY
 	              b.id,
-	              b.title ,
-	              b.author ,
-	              b.description",
+	              b.title,
+	              b.author,
+	              b.description,
+                b.image_url",
       class: Book::class,
       params: $params
     );

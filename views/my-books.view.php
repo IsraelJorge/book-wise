@@ -15,7 +15,7 @@
         Cadastre um novo livro!
       </h1>
 
-      <form method="POST" action="/book-create" class="p-4 flex flex-col gap-4">
+      <form method="POST" action="/book-create" enctype="multipart/form-data" class="p-4 flex flex-col gap-4">
         <?php if ($validations = flash()->get('validations')): ?>
           <div class="w-full font-semibold text-sm border-2 border-red-800 bg-red-900 text-red-400 rounded-md px-5 py-1">
             <ul>
@@ -26,6 +26,19 @@
             </ul>
           </div>
         <?php endif; ?>
+
+        <div class="flex flex-col gap-1">
+          <label class="text-stone-400 font-semibold text-sm" for="image">
+            Imagem
+          </label>
+          <input
+            id="image"
+            type="file"
+            name="image"
+            accept="image/*"
+            placeholder="Selecione uma imagem..."
+            class="border-stone-800 border-2 rounded-md px-2 py-1 bg-stone-900 text-sm outline-none" />
+        </div>
 
         <div class="flex flex-col gap-1">
           <label class="text-stone-400 font-semibold text-sm" for="title">

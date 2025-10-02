@@ -11,9 +11,14 @@ if (!auth()) {
 $title = trim($_POST['title']);
 $description = trim($_POST['description']);
 $author = trim($_POST['author']);
-$user_id = auth()->id;
+$userId = auth()->id;
+$nameFile = $_FILES['image']['name'];
 
 $validation = Validation::validate([
+  'nameFile' => [
+    'fieldName' => 'Imagem',
+    'rules' => ['required']
+  ],
   'title' => [
     'fieldName' => 'Titulo',
     'rules' => ['required', 'min:3']
@@ -26,15 +31,23 @@ $validation = Validation::validate([
     'fieldName' => 'Descrição',
     'rules' => ['required']
   ],
-], compact('title', 'author', 'description'));
+], compact('title', 'author', 'description', 'nameFile'));
 
 if ($validation->isInvalid()) {
   redirect("/my-books");
 }
 
+$dir = "images/";
+$file = $dir .  basename($nameFile);
+$newName = md5(rand());
+$extension = pathinfo($file, PATHINFO_EXTENSION);
+$imageUrl = "$dir$newName.$extension";
+
+move_uploaded_file($_FILES['image']['tmp_name'], $imageUrl);
+
 (new DB())->query(
-  query: "INSERT INTO books (title, description, author, user_id) VALUES (:title, :description, :author, :user_id)",
-  params: compact('title', 'description', 'author', 'user_id')
+  query: "INSERT INTO books (title, description, author, user_id, image_url) VALUES (:title, :description, :author, :userId, :imageUrl)",
+  params: compact('title', 'description', 'author', 'userId', 'imageUrl')
 );
 
 flash()->push('message', 'Livro cadastrado com sucesso!!!');
