@@ -3,6 +3,6 @@
 return [
   'database' => [
     'drive' => 'sqlite',
-    'srcDB' => 'database/db.sqlite'
+    'srcDB' => '../database/db.sqlite'
   ]
 ];

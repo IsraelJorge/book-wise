@@ -8,7 +8,7 @@ function view($view, $data = [])
     $$key = $value;
   }
 
-  require "views/template/app.php";
+  require "../views/template/app.php";
 }
 
 
@@ -44,7 +44,7 @@ function flash()
 
 function config($key = null)
 {
-  $config = require 'config.php';
+  $config = require '../config.php';
 
   if ($key && isset($config[$key])) {
     return $config[$key];

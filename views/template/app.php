@@ -10,7 +10,7 @@
 
 <body class="bg-stone-950 text-stone-200">
 
-  <?php include('./views/components/header.php'); ?>
+  <?php include('../views/components/header.php'); ?>
 
   <main class="mx-auto max-w-screen-lg py-4 space-y-6">
     <?php if ($message = flash()->get('message')): ?>
@@ -19,7 +19,7 @@
       </div>
     <?php endif; ?>
 
-    <?php require "views/{$view}.view.php"; ?>
+    <?php require "../views/{$view}.view.php"; ?>
 
   </main>
 </body>

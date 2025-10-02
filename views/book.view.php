@@ -1,4 +1,4 @@
-<?php include('./views/components/card-book.php'); ?>
+<?php include('../views/components/card-book.php'); ?>
 
 <h2>
   Avalizações

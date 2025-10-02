@@ -4,7 +4,7 @@
   <div class="flex flex-col col-span-3 gap-4">
     <?php if (isset($books)): ?>
       <?php foreach ($books as $book): ?>
-        <?php include('./views/components/card-book.php'); ?>
+        <?php include('../views/components/card-book.php'); ?>
       <?php endforeach; ?>
     <?php endif; ?>
   </div>

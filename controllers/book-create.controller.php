@@ -43,7 +43,7 @@ $newName = md5(rand());
 $extension = pathinfo($file, PATHINFO_EXTENSION);
 $imageUrl = "$dir$newName.$extension";
 
-move_uploaded_file($_FILES['image']['tmp_name'], $imageUrl);
+move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . "/../public/" . $imageUrl);
 
 (new DB())->query(
   query: "INSERT INTO books (title, description, author, user_id, image_url) VALUES (:title, :description, :author, :userId, :imageUrl)",
